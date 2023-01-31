@@ -1,2 +1,10 @@
-
-<image src="https://meta.kivisense.com/wechat-case/images/cloudar.png" mode=""/>
+<!-- 案例列表 -->
+<view class="cases-list">
+  <view class="case-item" wx:for="{{list}}" wx:key="index">
+    <image class="thumb" src="https://meta.kivisense.com/wechat-case/images/{{item.thumb}}" mode="widthFix"></image>
+    <view class="desc" bindtap="handleTap" data-index="{{index}}">
+      <view>{{item.name}}</view>
+      <view>点击进入</view>
+    </view>
+  </view>
+</view>
