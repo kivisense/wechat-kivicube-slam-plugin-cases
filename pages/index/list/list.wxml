@@ -1,6 +1,5 @@
-<!-- 案例列表 -->
-<view class="cases-list">
-  <view class="case-item" wx:for="{{list}}" wx:key="index">
+<view class="list-wrapper">
+  <view class="case-item" wx:for="{{list}}" wx:key="*this">
     <image class="thumb" src="https://meta.kivisense.com/wechat-case/images/{{item.thumb}}" mode="widthFix"></image>
     <view class="desc" bindtap="handleTap" data-index="{{index}}">
       <view>{{item.name}}</view>

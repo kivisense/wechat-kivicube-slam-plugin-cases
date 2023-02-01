@@ -1,2 +1,9 @@
-<!--pages/index/video-list/video-list.wxml-->
-<text>pages/index/video-list/video-list.wxml</text>
+<view class="swiper-wrapper">
+    <swiper duration="{{duration}}" current="{{current}}" vertical="{{true}}" cache-extent="{{cacheExtent}}" bindchange="swiperChange">
+        <block wx:for="{{list}}" wx:key="*this">
+            <swiper-item>
+                <view class="swiper-item {{item}}" data-index="{{index}}" bindtap="handleTapCase">{{item.name}}</view>
+            </swiper-item>
+        </block>
+    </swiper>
+</view>

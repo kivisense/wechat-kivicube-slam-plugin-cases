@@ -13,10 +13,6 @@ Page({
     const index = e.currentTarget.dataset.index;
     const { path } = this.data.list[index];
 
-    const prefix =
-      this.from === "meta"
-        ? "/subpackage/wechat-kivicube-slam-plugin-cases"
-        : "";
-    wx.navigateTo({ url: `${prefix}${path}` });
+    wx.navigateTo({ url: `../video-list/video-list?path=${path}` });
   },
 });
