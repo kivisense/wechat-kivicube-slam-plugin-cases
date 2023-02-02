@@ -1,0 +1,50 @@
+.slam {
+  display: block;
+  width: 100vw;
+  height: 100vh;
+}
+
+// 云识别提示框
+.guide-layer {
+  position: fixed;
+  z-index: 2;
+  top: 0;
+  left: 0;
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+  flex-direction: column;
+  text-align: center;
+
+  .image-guide{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 297px;
+    height: 335px;
+    color: #fff;
+    transform: translate(-50%, -50%);
+
+    .circle {
+      position: absolute;
+      top: 2px;
+      left: 2px;
+      width: 293px;
+      height: 331px;
+      box-shadow: 0 0 0 2000px rgba(0, 0, 0, 0.6);
+    }
+  
+    image{
+      position: relative;
+      display: block;
+      width: 297px;
+      height: 335px;
+    }
+
+    .tip {
+      position: absolute;
+      top: -30px;
+      width: 100%;
+    }
+  }
+}

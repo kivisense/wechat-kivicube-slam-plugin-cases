@@ -1,0 +1,26 @@
+<kivicube-slam
+  class="slam"
+  license="{{license}}"
+  bindready="ready"
+  binderror="error"
+  bindtap="tap"
+/>
+
+<!-- 云识别提示框 -->
+<view class="guide-layer" wx:if="{{showGuide}}">
+  <view class="image-guide">
+    <view class="circle"></view>
+    <image mode="aspectFit" src="https://meta.kivisense.com/wechat-case/images/scan-logo.png"></image>
+    <view class="tip">{{guideTip}}</view>
+  </view>
+</view>
+
+<!-- 地面对准提示 -->
+<view class="plane-tip {{showPlaneTip ? 'visible' : ''}}">
+  <view class="scan-image">
+    <image src="https://meta.kivisense.com/kivicube-slam-mp-plugin/assets/scan-horizontal.apng" mode="aspectFit" />
+  </view>
+  <view class="scan-text">
+    请对准地面识别
+  </view>
+</view>

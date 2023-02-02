@@ -1,0 +1,16 @@
+<kivicube-slam
+  class="slam"
+  license="{{license}}"
+  version="v2"
+  bindready="ready"
+  binderror="error"
+/>
+
+<!-- 云识别提示框 -->
+<view class="guide-layer" wx:if="{{showGuide}}">
+  <view class="image-guide">
+    <view class="circle"></view>
+    <image mode="aspectFit" src="https://meta.kivisense.com/wechat-case/images/scan-logo.png"></image>
+    <view class="tip">{{guideTip}}</view>
+  </view>
+</view>
