@@ -9,9 +9,11 @@ page {
     padding: 5.6vw 3.74vw;
 
     .case-item {
-        width: 44.8vw;
-        background-color: #fff;
+        display: flex;
         overflow: hidden;
+        width: 44.8vw;
+        flex-direction: column;
+        background-color: #fff;
         border-radius: 8px;
 
 
@@ -22,21 +24,48 @@ page {
         }
 
         .panel {
-            line-height: 42rpx;
+            display: flex;
+            flex: 1;
+            flex-direction: column;
+            justify-content: space-between;
             padding: 3vw 1.37vw 2.74vw;
             color: #909090;
-            font-size: 28rpx;
 
             .title {
                 display: flex;
                 align-items: center;
-                margin-top: 2.3vw;
+                margin-top: 3vw;
+                font-size: 28rpx;
+                line-height: 1;
+
                 image {
-                    display: block;
+                    display: inline-block;
                     width: 3.2vw;
                     height: 3.2vw;
                     margin-right: 1.4vw;
+                    vertical-align: bottom;
                 }
+
+                .text {
+                    overflow: hidden;
+                    flex: 1;
+                    text-overflow: ellipsis;
+                    white-space: nowrap;
+                }
+            }
+
+            .desc {
+                display: box;
+                overflow: hidden;
+                -webkit-box-orient: vertical;
+                color: #000;
+                font-size: 30rpx;
+                -webkit-line-clamp: 2;
+                line-height: 135%;
+                text-overflow: ellipsis;
+                white-space: normal;
+                word-break: break-all;
+                word-wrap: break-word;
             }
         }
     }
@@ -44,7 +73,7 @@ page {
 
 .back {
     position: absolute;
+    z-index: 100;
     left: 1.87vw;
     width: auto;
-    z-index: 100;
 }

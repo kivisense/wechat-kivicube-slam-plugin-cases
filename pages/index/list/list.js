@@ -28,4 +28,8 @@ Page({
 
     wx.navigateTo({ url: `../video-list/video-list?path=${path}` });
   },
+
+  back() {
+    wx.navigateBack({ delta: 1 });
+  },
 });
