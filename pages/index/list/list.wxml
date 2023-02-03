@@ -1,9 +1,17 @@
-<view class="list-wrapper">
+<view class="list-wrapper" style="{{wrapperStyle}}">
   <view class="case-item" wx:for="{{list}}" wx:key="*this">
     <image class="thumb" src="https://meta.kivisense.com/wechat-case/images/{{item.thumb}}" mode="widthFix"></image>
-    <view class="desc" bindtap="handleTap" data-index="{{index}}">
-      <view>{{item.name}}</view>
-      <view>点击进入</view>
+    <view class="panel" bindtap="handleTap" data-index="{{index}}">
+      <view class="desc">描述文字描述文字描述文字描述文字</view>
+      <view class="title"><image src="/static/logo.png" mode="aspectFit"/> {{item.name}}</view>
     </view>
   </view>
 </view>
+
+<image
+  style="{{backStyle}}"
+  class="back"
+  src="/static/back.png"
+  mode="heightFix"
+  bind:tap="back"
+/>
