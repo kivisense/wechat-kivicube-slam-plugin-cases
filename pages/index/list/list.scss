@@ -7,13 +7,14 @@ page {
     flex-wrap: wrap;
     justify-content: space-between;
     padding: 3.2vw 1vw;
+    padding-bottom: env(safe-area-inset-bottom);
 
     .case-item {
         display: flex;
         overflow: hidden;
         width: 48vw;
-        margin-bottom: 2vw;
         flex-direction: column;
+        margin-bottom: 2vw;
         background-color: #fff;
         border-radius: 8px;
 
@@ -26,43 +27,30 @@ page {
 
         .panel {
             display: flex;
-            flex: 1;
+            // flex: 1;
             flex-direction: column;
             justify-content: space-between;
-            padding: 3vw 1.37vw 2.74vw;
+            padding: 0 2.66vw 4.8vw;
             color: #909090;
 
             .title {
-                display: flex;
-                align-items: center;
-                margin-top: 3vw;
-                font-size: 28rpx;
-                line-height: 1;
-
-                image {
-                    display: inline-block;
-                    width: 3.2vw;
-                    height: 3.2vw;
-                    margin-right: 1.4vw;
-                    vertical-align: bottom;
-                }
-
-                .text {
-                    overflow: hidden;
-                    flex: 1;
-                    text-overflow: ellipsis;
-                    white-space: nowrap;
-                }
+                overflow: hidden;
+                margin: 2.5vw 0;
+                color: #000;
+                font-size: 4vw;
+                line-height: 5.87vw;
+                text-overflow: ellipsis;
+                white-space: nowrap;
             }
 
             .desc {
-                display: -webkit-box;
+                display: box;
                 overflow: hidden;
+                min-height: 9vw;
                 -webkit-box-orient: vertical;
-                color: #000;
-                font-size: 30rpx;
+                font-size: 3.47vw;
                 -webkit-line-clamp: 2;
-                line-height: 135%;
+                line-height: 4.8vw;
                 text-overflow: ellipsis;
                 white-space: normal;
                 word-break: break-all;

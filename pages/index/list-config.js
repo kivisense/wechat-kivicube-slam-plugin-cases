@@ -20,6 +20,7 @@ const list = [
   //   name: "4AR识别 - 平面AR放置",
   //   thumb: "cloudar.png",
   //   path: "/cloudar-v1/cloudar-v1",
+  //   desc: "描述文字描述描述文字文字描述文字描述描述文字文字",
   // },
   // {
   //   name: "5AR识别 - 平面AR放置",
