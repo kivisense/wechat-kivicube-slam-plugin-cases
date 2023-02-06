@@ -1,5 +1,6 @@
 {
   "usingComponents": {
-    "kivicube-slam": "plugin://kivicube-slam/kivicube-slam"
+    "kivicube-slam": "plugin://kivicube-slam/kivicube-slam",
+    "backBtn": "../components/back-btn/back-btn"
   }
 }

@@ -53,7 +53,7 @@ Page({
        * @param {Array} [sceneList=[]] - 希望识别到的场景id列表。如果识别到的场景不在此列表中，则会忽略，继续识别。如果为空，或空数组，则代表识别合辑下的所有场景。
        * @returns {Promise<String|Undefined>} 场景id。如果识别过程中调用了stopCloudar，则会返回undefined值。
        */
-      const sceneId = await this.slam.startCloudar("b46rfc").catch((err) => {
+      const sceneId = await this.slam.startCloudar("9l0rm3").catch((err) => {
         clearTimeout(timer);
         errorHandler(err);
       });
@@ -98,20 +98,28 @@ Page({
     // console.log("相机的Z轴与天空的夹角：", angleToSky);
 
     /**
-     * 如果相机的Z轴向量与天空向量的夹角小于 90 度，那么相机就朝向天空
+     * 如果相机的Z轴向量与天空向量的夹角小于 90度 (Math.PI / 2)，那么相机就朝向天空
      * 注意：这个判断值可以根据需求自行调整
      * **/
-    if (angleToSky < Math.PI / 2) {
+    if (angleToSky < Math.PI / 1.5) {
       // wx.showToast({ title: "朝向天空啦，请对准地面哟", icon: "none" });
       this.setData({ showPlaneTip: true });
+      this.reticleModel.visible = false;
+      // this.resetV1PlaneOnce();
     } else {
       // wx.hideToast();
       this.setData({ showPlaneTip: false });
+      this.reticleModel.visible = true;
     }
   },
 
   startPlay() {
     const { slam, reticleModel, rabbitModel } = this;
+    const group = slam.createGroup();
+    group.add(reticleModel);
+
+    // 先隐藏模型和指示器
+    reticleModel.visible = false;
     rabbitModel.visible = false;
     slam.add(rabbitModel, 0.8);
 
@@ -125,15 +133,36 @@ Page({
      * 模型就会被放置在很远的地方，导致模型不可见或者特别小。这个时候我们利用 onPlaneShowing 这个持续放置成功的回调，
      * 来检测体验者相机的倾斜角度，以此来提醒用户让相机尽量倾斜向下体验。
      * **/
-    slam.addPlaneIndicator(reticleModel, {
+    slam.addPlaneIndicator(group, {
       size: 0.5,
       // camera画面中心对准的位置有可用平面，指示器持续放置到该平面都放置成功的时候调用 **持续**调用
       onPlaneShowing: () => {
-        reticleModel.rotation.y += 0.02;
+        group.rotation.y += 0.02;
         invokeCheck();
       },
     });
   },
+
+  // v1模式下, 通过放置模型的方法, 重置一次平面
+  // resetV1PlaneOnce() {
+  //   if (this._resetPlane) return;
+
+  //   const {slam, rabbitModel } = this;
+  //   const { windowWidth, windowHeight } = wx.getSystemInfoSync();
+  //   const success = slam.standOnThePlane(
+  //     rabbitModel,
+  //     Math.round(windowWidth / 2),
+  //     Math.round(windowHeight / 2),
+  //     true
+  //   );
+
+  //   if (success) {
+  //     console.log("重置成功");
+  //     this._resetPlane = true;
+  //     slam.removePlaneIndicator();
+  //     this.startPlay();
+  //   }
+  // },
 
   tap() {
     const { slam, rabbitModel, reticleModel } = this;
