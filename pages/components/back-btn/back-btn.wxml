@@ -1,0 +1,7 @@
+<image
+  style="{{backStyle}}"
+  class="back"
+  src="./back.png"
+  mode="heightFix"
+  bindtap="back"
+/>

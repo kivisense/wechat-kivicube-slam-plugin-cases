@@ -20,9 +20,7 @@ Page({
       requestFile(
         "https://meta.kivisense.com/kivicube-slam-mp-plugin/demo-assets/model/rabbit.glb"
       ),
-      requestFile(
-        "https://meta.kivisense.com/kivicube-slam-mp-plugin/demo-assets/model/reticle.glb"
-      ),
+      requestFile("https://meta.kivisense.com/wechat-case/model/indicator.glb"),
     ]);
   },
 
