@@ -6,12 +6,13 @@ page {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
-    padding: 5.6vw 3.74vw;
+    padding: 3.2vw 1vw;
 
     .case-item {
         display: flex;
         overflow: hidden;
-        width: 44.8vw;
+        width: 48vw;
+        margin-bottom: 2vw;
         flex-direction: column;
         background-color: #fff;
         border-radius: 8px;
@@ -55,7 +56,7 @@ page {
             }
 
             .desc {
-                display: box;
+                display: -webkit-box;
                 overflow: hidden;
                 -webkit-box-orient: vertical;
                 color: #000;

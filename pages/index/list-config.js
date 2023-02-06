@@ -11,11 +11,11 @@ const list = [
     path: "/cloudar-v2/cloudar-v2",
     desc: "描述文字描述述文",
   },
-  // {
-  //   name: "3AR识别 - 世界AR放置",
-  //   thumb: "cloudar.png",
-  //   path: "/cloudar-v1/cloudar-v1",
-  // },
+  {
+    name: "3AR识别 - 世界AR放置",
+    thumb: "cloudar.png",
+    path: "/cloudar-v1/cloudar-v1",
+  },
   // {
   //   name: "4AR识别 - 平面AR放置",
   //   thumb: "cloudar.png",

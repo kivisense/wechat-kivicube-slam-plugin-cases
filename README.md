@@ -1,3 +1,1 @@
-# Kivicube Slam插件模板
-
-## 目录
+# Kivicube Slam交互模板

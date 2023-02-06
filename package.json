@@ -1,20 +1,20 @@
 {
-  "name": "wechat-kivicube-slam-plugin-api-demo",
+  "name": "wechat-kivicube-slam-plugin-cases",
   "version": "1.0.0",
-  "description": "Kivicube Slam高级API示例项目",
+  "description": "Kivicube Slam交互模板",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/kivisense/wechat-kivicube-slam-plugin-api-demo.git"
+    "url": "git+https://github.com/kivisense/wechat-kivicube-slam-plugin-cases.git"
   },
   "private": true,
   "author": "Kivisense",
   "bugs": {
-    "url": "https://github.com/kivisense/wechat-kivicube-slam-plugin-api-demo/issues"
+    "url": "https://github.com/kivisense/wechat-kivicube-slam-plugin-cases/issues"
   },
-  "homepage": "https://github.com/kivisense/wechat-kivicube-slam-plugin-api-demo#readme",
+  "homepage": "https://github.com/kivisense/wechat-kivicube-slam-plugin-cases#readme",
   "devDependencies": {
     "miniprogram-api-typings": "^3.4.3"
   }
