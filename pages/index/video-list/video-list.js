@@ -26,5 +26,6 @@ Page({
 
   swiperChange({ detail }) {
     console.log(detail.current);
+    this.setData({ current: detail.current });
   },
 });

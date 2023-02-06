@@ -19,10 +19,10 @@ page {
         border-radius: 8px;
 
 
-        image {
+        .thumb {
             display: block;
             width: 100%;
-            height: 100%;
+            height: 63.47vw;
         }
 
         .panel {
@@ -44,7 +44,7 @@ page {
             }
 
             .desc {
-                display: box;
+                display: -webkit-box;
                 overflow: hidden;
                 min-height: 9vw;
                 -webkit-box-orient: vertical;

@@ -1,8 +1,25 @@
 <view class="swiper-wrapper">
     <swiper duration="{{duration}}" current="{{current}}" vertical="{{true}}" cache-extent="{{cacheExtent}}" bindchange="swiperChange">
-        <block wx:for="{{list}}" wx:key="*this">
+        <block wx:for="{{list}}" wx:key="index">
             <swiper-item>
-                <view class="swiper-item {{item}}" data-index="{{index}}" bindtap="handleTapCase">{{item.name}}</view>
+                <view class="swiper-item">
+                    <image class="poster" src="https://meta.kivisense.com/wechat-case/images/{{item.poster}}" mode="aspectFill"/>
+                    <video 
+                        wx:if="{{current == index}}"
+                        class="video"
+                        loop
+                        autoplay
+                        controls="{{false}}"
+                        src="{{item.video}}"
+                    />
+                    <view class="info-panel">
+                        <view class="name">{{item.name}}</view>
+                        <view class="btn" bindtap="handleTapCase" data-index="{{index}}">立即体验</view>
+                        <view>
+                            <image src="./arrow-top.png" mode="aspectFit" />
+                        </view>
+                    </view>
+                </view>
             </swiper-item>
         </block>
     </swiper>

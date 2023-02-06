@@ -1,6 +1,6 @@
 <view class="list-wrapper">
   <view class="case-item" wx:for="{{list}}" wx:key="*this" bindtap="handleTap" data-index="{{index}}">
-    <image class="thumb" src="https://meta.kivisense.com/wechat-case/images/{{item.thumb}}" mode="widthFix"></image>
+    <image class="thumb" src="https://meta.kivisense.com/wechat-case/images/{{item.thumb}}" mode="scaleToFill"></image>
     <view class="panel">
       <view class="title">{{item.name}}</view>
       <view class="desc">{{item.desc}}</view>
