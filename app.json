@@ -2,20 +2,21 @@
   "pages": [
     "pages/index/list/list",
     "pages/index/video-list/video-list",
-    "pages/cloudar-v1/cloudar-v1",
-    "pages/cloudar-v2/cloudar-v2"
+    "pages/cloudar-plane/cloudar-plane",
+    "pages/cloudar-vio/cloudar-vio"
   ],
   "plugins": {
     "kivicube-slam": {
       "provider": "wx12ad8a61f049ea02",
-      "version": "1.3.20"
+      "version": "1.3.21"
     }
   },
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#fff",
-    "navigationBarTitleText": "Kivicube Slam API Demo",
-    "navigationBarTextStyle": "black"
+    "navigationBarTitleText": "Kivicube Slam Cases",
+    "navigationBarTextStyle": "black",
+    "navigationStyle": "custom"
   },
   "lazyCodeLoading": "requiredComponents",
   "style": "v2",

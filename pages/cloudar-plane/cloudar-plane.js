@@ -36,8 +36,14 @@ Page({
       wx.hideLoading();
 
       this.slam = slam;
+      // slam是否是v2模式
+      this._isV2 = slam.isSlamV2();
       this.rabbitModel = rabbitModel;
       this.reticleModel = reticleModel;
+
+      console.log("当前slam版本是否为v1：", slam.isSlamV1());
+      console.log("当前slam版本是否为v2：", slam.isSlamV2());
+      console.log("当前是否为陀螺仪追踪：", slam.isGyroscope());
 
       this.setData({ showGuide: true });
 
@@ -45,7 +51,7 @@ Page({
       const timer = setTimeout(() => {
         this.slam.stopCloudar();
         this.startPlay();
-      }, 10000);
+      }, 500);
 
       /**
        * 开始去云识别图片。
@@ -78,6 +84,8 @@ Page({
     const cameraUp = camera.getWorldDirection();
 
     /**
+     * 注意，这里有一个极端情况：
+     * 如果在slam初始化的时候，体验者的手机相机是望向天空的一个状态，初始化后，不论手机怎么移动都无法获取相机朝向的正确向量值
      * 这个向量的 x,y,z 分别为 0,-1,0 的时候，体验者可能一开始就抬起相机望向了天空
      * **/
     const { x, y, z } = cameraUp;
@@ -101,13 +109,10 @@ Page({
      * 如果相机的Z轴向量与天空向量的夹角小于 90度 (Math.PI / 2)，那么相机就朝向天空
      * 注意：这个判断值可以根据需求自行调整
      * **/
-    if (angleToSky < Math.PI / 1.5) {
-      // wx.showToast({ title: "朝向天空啦，请对准地面哟", icon: "none" });
+    if (angleToSky < Math.PI / 1.65) {
       this.setData({ showPlaneTip: true });
       this.reticleModel.visible = false;
-      // this.resetV1PlaneOnce();
     } else {
-      // wx.hideToast();
       this.setData({ showPlaneTip: false });
       this.reticleModel.visible = true;
     }
@@ -121,7 +126,7 @@ Page({
     // 先隐藏模型和指示器
     reticleModel.visible = false;
     rabbitModel.visible = false;
-    slam.add(rabbitModel, 0.8);
+    slam.add(rabbitModel, 0.5);
 
     this.setData({ showGuide: false });
 
@@ -132,40 +137,48 @@ Page({
      * v1模式因为有一个巨大的平面，所以有着超高的放置成功率，但是一旦体验者将相机朝向天空，
      * 模型就会被放置在很远的地方，导致模型不可见或者特别小。这个时候我们利用 onPlaneShowing 这个持续放置成功的回调，
      * 来检测体验者相机的倾斜角度，以此来提醒用户让相机尽量倾斜向下体验。
+     * 
+     * v2模式只需要知道模型放置的成功与否，就能判断当前体验者相机的中心点朝向的位置是否有可用的平面，
+     * 这里利用 onPlaneShow 和 onPlaneHide 两个回调函数就能实现。
      * **/
     slam.addPlaneIndicator(group, {
       size: 0.5,
+      // camera画面中心对准的位置有可用平面，指示器初次放置到该平面的时候调用
+      onPlaneShow: () => {
+        console.log("onPlaneShow");
+
+        if (this._isV2) {
+          clearTimeout(this._timer);
+          reticleModel.visible = true;
+          this.setData({ showPlaneTip: false });
+        }
+
+      },
+      // camera画面中心对准的位置无可用平面，指示器无法放置的时候调用
+      onPlaneHide: () => {
+        console.log("onPlaneHide");
+
+        if (this._isV2) {
+          clearTimeout(this._timer);
+          this._timer = setTimeout(() => {
+            reticleModel.visible = false;
+            this.setData({ showPlaneTip: true });
+          }, 400);
+        }
+      },
       // camera画面中心对准的位置有可用平面，指示器持续放置到该平面都放置成功的时候调用 **持续**调用
       onPlaneShowing: () => {
-        group.rotation.y += 0.02;
-        invokeCheck();
+        if (!this._isV2) {
+          group.rotation.y += 0.02;
+          invokeCheck();
+        }
       },
     });
   },
 
-  // v1模式下, 通过放置模型的方法, 重置一次平面
-  // resetV1PlaneOnce() {
-  //   if (this._resetPlane) return;
-
-  //   const {slam, rabbitModel } = this;
-  //   const { windowWidth, windowHeight } = wx.getSystemInfoSync();
-  //   const success = slam.standOnThePlane(
-  //     rabbitModel,
-  //     Math.round(windowWidth / 2),
-  //     Math.round(windowHeight / 2),
-  //     true
-  //   );
-
-  //   if (success) {
-  //     console.log("重置成功");
-  //     this._resetPlane = true;
-  //     slam.removePlaneIndicator();
-  //     this.startPlay();
-  //   }
-  // },
-
   tap() {
     const { slam, rabbitModel, reticleModel } = this;
+    // 如果指示器模型未显示，点击后不做后续操作
     if (!reticleModel.visible) return;
 
     const { windowWidth, windowHeight } = wx.getSystemInfoSync();
