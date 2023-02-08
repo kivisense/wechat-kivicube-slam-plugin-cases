@@ -7,7 +7,7 @@
   binderror="error"
   bindtap="tap"
 />
-
+<!-- <image class="poster" style="width: 100vw;height: 100vh;" src="https://meta.kivisense.com/wechat-case/images/cloudar.png" mode="aspectFill"/> -->
 <!-- 云识别提示框 -->
 <view class="guide-layer" wx:if="{{showGuide}}">
   <view class="image-guide">

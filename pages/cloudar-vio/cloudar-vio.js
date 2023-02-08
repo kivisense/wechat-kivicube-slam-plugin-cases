@@ -12,7 +12,7 @@ Page({
 
     this.downloadAsset = Promise.all([
       requestFile(
-        "https://meta.kivisense.com/kivicube-slam-mp-plugin/demo-assets/model/rabbit.glb"
+        "https://meta.kivisense.com/wechat-case/model/rabbit.glb"
       ),
     ]);
   },

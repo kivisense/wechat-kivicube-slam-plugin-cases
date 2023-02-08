@@ -1,7 +1,10 @@
 {
     "renderer": "skyline",
+    "disableScroll": true,
+    "enablePullDownRefresh": false,
     "navigationStyle": "custom",
     "usingComponents": {
-        "backBtn": "../../components/back-btn/back-btn"
+        "back-btn": "../../components/back-btn/back-btn",
+        "video-swiper": "../../components/video-swiper/video-swiper"
     }
 }
