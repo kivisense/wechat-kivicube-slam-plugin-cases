@@ -14,8 +14,8 @@ Page({
     // this.currentCasePath = e.path;
     const index = list.findIndex((i) => i.path === e.path);
     // const current = index % 3;
-    console.log("video-list onLoad, current is", index);
-    this.setData({ current: index, showSwiper: true, duration: 500, });
+    console.log("video-list onLoad, index is", index);
+    this.setData({ videoIndex: index, showSwiper: true, duration: 500, });
   },
 
   handleTapCase(e) {

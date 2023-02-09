@@ -91,6 +91,17 @@ module.exports =
 
 "use strict";
 
+function getArrGap(arr, index){
+    if (arr.length <= 3 ) {
+        return {prev: [], current: arr, next: []};
+    }
+
+    const prev = arr.slice(0, index - 1);
+    const current = arr.slice(index - 1, index + 2);
+    const next = arr.slice(index + 2);
+    return {prev, current, next}
+}
+
 Component({
     options: {
         cacheExtent: 1, // *Skyline 缓存区域大小，值为 1 表示提前渲染上下各一屏区域
@@ -99,7 +110,7 @@ Component({
         pureDataPattern: /^_/
     },
     properties: {
-        current: {
+        videoIndex: {
             type: Number,
             value: 0
         },
@@ -121,7 +132,7 @@ Component({
             observer: function observer() {
                 var newVal = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
                 newVal.map((item, index) => {
-                    return item.idxKey = index;
+                    return item.idxKey = item.id;
                 });
                 this._videoListChanged(newVal);
                 this.setData({total: newVal.length})
@@ -133,7 +144,8 @@ Component({
         prevQueue: [],
         curQueue: [],
         circular: false,
-        _last: 0,
+        current: 1,
+        _last: 1,
         _change: -1,
         _invalidUp: 0,
         _invalidDown: 0,
@@ -149,30 +161,34 @@ Component({
     methods: {
         _videoListChanged: function _videoListChanged(newVal) {
             var _this = this;
-
             var data = this.data;
-            newVal.forEach(function (item) {
-                data.nextQueue.push(item);
-            });
-
-            
             if (data.curQueue.length === 0) {
-                // let curQueue = [];
-                // if (newVal.length == 4) {
-                //     curQueue = data.nextQueue;
-                // } else {
-                //     curQueue = data.nextQueue.splice(0, 3);
-                // }
-                console.log(this.properties.current)
+                // 如果是列表第一个视频
+                let index = this.properties.videoIndex;
+                // 设置初始视频索引为0
+                if (this.properties.videoIndex === 0) {
+                    index = 1;
+                    this.setData({ current: 0, _last: 0 });
+                }
 
-                const prevQueue = newVal.slice(0, this.properties.current);
+                const lastIndex = this.properties.videoList.length - 1;
+                if (this.properties.videoIndex === lastIndex) {
+                    index = lastIndex - 1;
+                    this.setData({ current: 2, _last: 2, _change: 2 });
+                }
+
+                const {current, prev, next} = getArrGap(newVal, index);
+
+                console.log("prev:", prev.map((i)=>i.id).toString())
+                console.log("current:", current.map((i)=>i.id).toString())
+                console.log("next:", next.map((i)=>i.id).toString())
+
                 this.setData({
-                    prevQueue,
-                    curQueue: data.nextQueue.splice(this.properties.current, 3)
+                    prevQueue: prev,
+                    curQueue: current,
+                    nextQueue: next,
                 }, function () {
-                    console.log(data.curQueue);
-                    console.log(data.prevQueue)
-                    _this.playCurrent(0);
+                    _this.playCurrent(data.current);
                 });
             }
         },
@@ -186,34 +202,34 @@ Component({
 
             var current = e.detail.current;
             var diff = current - _last;
-            console.log("diff", diff, "current", current);
             if (diff === 0) return;
             this.playCurrent(current);
-            this.data._last = current;
             this.triggerEvent('change', { activeId: curQueue[current].id });
             var direction = diff === 1 || diff === -2 ? 'up' : 'down';
-            console.log("direction is", direction);
+            
             if (direction === 'up') {
                 if (this.data._invalidDown === 0) {
+                    // 往上滑动，第一次是拿到的值是0
                     var change = (_change + 1) % 3;
+                    // 拿到待播放列表的第一项值，作为当前播放列表的第一项
                     var add = nextQueue.shift();
                     var remove = curQueue[change];
-                    console.log("change:", change, "add:", add, "remove:", remove)
                     if (add) {
                         prevQueue.push(remove);
-                        console.log("prevQueue", prevQueue);
                         curQueue[change] = add;
                         this.data._change = change;
                     } else {
                         this.data._invalidUp += 1;
                     }
+
                 } else {
                     this.data._invalidDown -= 1;
                 }
             }
             if (direction === 'down') {
                 if (this.data._invalidUp === 0) {
-                    var _change2 = _change;
+                    // 用户第一次操作就是下拉视频，改变的值 取_last初始值(_videoListChanged执行结束后的值)
+                    var _change2 = _change === -1 ? 0 : _change;
                     var _remove = curQueue[_change2];
                     var _add = prevQueue.pop();
                     if (_add) {
@@ -223,10 +239,12 @@ Component({
                     } else {
                         this.data._invalidDown += 1;
                     }
+
                 } else {
                     this.data._invalidUp -= 1;
                 }
             }
+            
             var circular = true;
             if (nextQueue.length === 0 && current !== 0) {
                 circular = false;
@@ -234,9 +252,15 @@ Component({
             if (prevQueue.length === 0 && current !== 2) {
                 circular = false;
             }
+            console.log("direction is", direction, "circular", circular);
+            console.log("prev:",prevQueue.map((i)=>i.id).toString())
+            console.log("当前swiper current", current);
+            console.log("current:",curQueue.map((i)=>i.id).toString())
+            console.log("next:",nextQueue.map((i)=>i.id).toString())
             this.setData({
                 curQueue: curQueue,
-                circular: circular
+                circular: circular,
+                _last: current,
             });
         },
         playCurrent: function playCurrent(current) {

@@ -5,7 +5,7 @@
     circular="{{circular}}" 
     cache-extent="{{cacheExtent}}"
     easing-function="{{easingFunction}}" 
-    current="0"
+    current="{{current}}"
     duration="{{duration}}" 
     bindanimationfinish="animationfinish">
     <!-- curQueue 循环会导致video重新插入，objectFit 不可变更 -->

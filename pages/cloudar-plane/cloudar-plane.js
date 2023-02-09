@@ -51,7 +51,7 @@ Page({
       const timer = setTimeout(() => {
         this.slam.stopCloudar();
         this.startPlay();
-      }, 500);
+      }, 10000);
 
       /**
        * 开始去云识别图片。

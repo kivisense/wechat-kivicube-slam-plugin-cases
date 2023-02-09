@@ -1,4 +1,4 @@
-<video-swiper video-list="{{videoList}}" current="{{current}}" duration="{{duration}}" wx:if="{{showSwiper}}">
+<video-swiper video-list="{{videoList}}" video-index="{{videoIndex}}" duration="{{duration}}" wx:if="{{showSwiper}}">
     <view wx:for="{{videoList}}" wx:key="index" slot="item_{{item.id}}">
         <!-- <image class="poster" src="https://meta.kivisense.com/wechat-case/images/{{item.poster}}" mode="aspectFill"/> -->
         <view class="info-panel">
