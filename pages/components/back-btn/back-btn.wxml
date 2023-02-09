@@ -2,6 +2,6 @@
   style="{{backStyle}}"
   class="back"
   src="./back.png"
-  mode="heightFix"
+  mode="aspectFit"
   bindtap="back"
 />

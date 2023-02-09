@@ -21,7 +21,7 @@ Component({
 
       const backStyle = `left: ${windowWidth - right}px; top: ${
         top + (height - backHeight) / 2
-      }px; height: ${backHeight}px`;
+      }px; height: ${backHeight}px; width: ${backHeight}px`;
 
       this.setData({ backStyle });
     },
