@@ -62,13 +62,25 @@ Page({
 
   startPlay() {
     const { slam, rabbitModel } = this;
-    // 设置3d对象的位置属性，在手机前方1米，并靠下0.5米
-    rabbitModel.position.z = -1;
-    rabbitModel.position.y = -0.5;
-    slam.add(rabbitModel, 0.5);
+    // 把模型位置变更到相机的正前方并朝向相机
+    this.setModelFaceToCamera(rabbitModel)
 
+    // 设置3d对象的位置属性，靠下0.5米
+    rabbitModel.position.y -= 0.5;
+    slam.add(rabbitModel, 0.5);
+    rabbitModel.playAnimation({ loop: true });
     this.setData({ showGuide: false });
   },
+
+  // 让模型放在相机正前方水平位置
+  setModelFaceToCamera(model) {
+    const camera = this.slam.defaultCamera;
+    const direction = camera.getWorldDirection().clone();
+    const cameraPosition = camera.position.clone();
+    model.position.copy(direction.add(cameraPosition));
+    // 朝向相机
+    model.lookAt(cameraPosition.x, cameraPosition.y, cameraPosition.z);
+  },
 
   error({ detail }) {
     wx.hideLoading();

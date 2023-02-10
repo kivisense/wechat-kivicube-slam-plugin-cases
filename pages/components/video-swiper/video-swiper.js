@@ -172,9 +172,14 @@ Component({
                 }
 
                 const lastIndex = this.properties.videoList.length - 1;
+                // 边界情况处理
                 if (this.properties.videoIndex === lastIndex) {
                     index = lastIndex - 1;
-                    this.setData({ current: 2, _last: 2, _change: 2 });
+                    if (lastIndex < 2) {
+                        this.setData({ current: lastIndex, _last: lastIndex, _change: 2 });
+                    } else {
+                        this.setData({ current: 2, _last: 2, _change: 2 });
+                    }
                 }
 
                 const {current, prev, next} = getArrGap(newVal, index);
@@ -218,6 +223,10 @@ Component({
                         prevQueue.push(remove);
                         curQueue[change] = add;
                         this.data._change = change;
+
+                        // if (nextQueue.length === 0 && current < 2) {
+                        //     prevQueue.push(curQueue.pop());
+                        // }
                     } else {
                         this.data._invalidUp += 1;
                     }
@@ -253,10 +262,9 @@ Component({
                 circular = false;
             }
             console.log("direction is", direction, "circular", circular);
-            console.log("prev:",prevQueue.map((i)=>i.id).toString())
-            console.log("当前swiper current", current);
-            console.log("current:",curQueue.map((i)=>i.id).toString())
+            console.log(`${prevQueue.map((i)=>i.id).toString()}、`, `${curQueue.map((i)=>i.id).toString()}/ ${current}`)
             console.log("next:",nextQueue.map((i)=>i.id).toString())
+
             this.setData({
                 curQueue: curQueue,
                 circular: circular,
