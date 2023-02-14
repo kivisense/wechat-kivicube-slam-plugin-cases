@@ -1,6 +1,6 @@
 import list from "../list-config";
 
-const videoList = list.map((item, index) => ({ id: index + 1, url: item.video, name: item.name, poster: item.poster, objectFit: "cover" }))
+const videoList = list.map((item, index) => ({ id: index + 1, url: item.video, name: item.name, customBtn: item.customBtn, poster: item.poster, objectFit: "cover" }))
 
 Page({
   data: {
@@ -11,16 +11,21 @@ Page({
   },
 
   onLoad(e) {
-    // this.currentCasePath = e.path;
-    const index = list.findIndex((i) => i.path === e.path);
-    // const current = index % 3;
+    const index = list.findIndex((i) => i.path === decodeURIComponent(e.path));
+
     console.log("video-list onLoad, index is", index);
     this.setData({ videoIndex: index, showSwiper: true, duration: 500, });
   },
 
   handleTapCase(e) {
-    const index = e.currentTarget.dataset.index;
-    const { path } = this.data.list[index];
+    const {index, cindex} = e.currentTarget.dataset;
+
+    let { path, customBtn } = videoList[index];
+
+    // 如果有自定义按钮 设置为自定义按钮跳转的路径地址
+    if (customBtn) {
+      path = customBtn[cindex].path;
+    }
 
     console.log(path);
     wx.navigateTo({

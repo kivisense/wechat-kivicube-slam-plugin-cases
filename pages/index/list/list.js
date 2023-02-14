@@ -11,7 +11,7 @@ Page({
     const index = e.currentTarget.dataset.index;
     const { path } = this.data.list[index];
 
-    wx.navigateTo({ url: `../video-list/video-list?path=${path}` });
+    wx.navigateTo({ url: `../video-list/video-list?path=${encodeURIComponent(path)}` });
   },
 
   back() {

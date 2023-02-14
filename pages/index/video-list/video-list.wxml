@@ -2,8 +2,15 @@
     <view wx:for="{{videoList}}" wx:key="index" slot="item_{{item.id}}">
         <!-- <image class="poster" src="https://meta.kivisense.com/wechat-case/images/{{item.poster}}" mode="aspectFill"/> -->
         <view class="info-panel">
-            <view class="name">{{item.name}}</view>
-            <view class="btn" bindtap="handleTapCase" data-index="{{index}}">立即体验</view>
+            <view class="name">{{item.name}}{{index}}</view>
+            <view class="btn-wrap">
+                <block wx:if="{{item.customBtn}}">
+                    <view wx:for="{{item.customBtn}}" wx:for-index="cindex" wx:key="cindex" class="btn" bindtap="handleTapCase" data-index="{{index}}" data-cindex="{{cindex}}">{{item.text}}</view>
+                </block>
+                <block wx:else>
+                    <view class="btn" bindtap="handleTapCase" data-index="{{index}}">开始体验</view>
+                </block>
+            </view>
             <view>
                 <image src="./arrow-top.png" mode="aspectFit" />
             </view>
