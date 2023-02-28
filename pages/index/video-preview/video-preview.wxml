@@ -1,0 +1,34 @@
+<video 
+  id="video_preview" 
+  class="video_item" 
+  autoplay="{{true}}"
+  loop="{{true}}" 
+  enable-play-gesture 
+  enable-progress-gesture 
+  show-center-play-btn="{{false}}"
+  controls="{{false}}"
+  src="{{info.video}}" 
+  object-fit="cover"
+  bindplay="onPlay"
+  bindpause="onPause"
+  bindended="onEnded"
+  binderror="onError"
+  bindtimeupdate="onTimeUpdate"
+  bindwaiting="onWaiting"
+  bindprogress="onProgress"
+  bindloadedmetadata="onLoadedMetaData"
+>
+</video>
+<view class="info-panel">
+  <view class="name">{{info.name}}</view>
+  <view class="btn-wrap">
+    <block wx:if="{{info.customBtn}}">
+      <view wx:for="{{info.customBtn}}" wx:key="index" class="btn" bindtap="handleTapCase" data-index="{{index}}">{{item.text}}</view>
+    </block>
+    <block wx:else>
+      <view class="btn" bindtap="handleTapCase" data-index="{{index}}">开始体验</view>
+    </block>
+  </view>
+</view>
+
+<back-btn />

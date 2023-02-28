@@ -2,13 +2,14 @@
   "pages": [
     "pages/index/list/list",
     "pages/index/video-list/video-list",
+    "pages/index/video-preview/video-preview",
     "pages/cloudar-plane/cloudar-plane",
     "pages/cloudar-vio/cloudar-vio"
   ],
   "plugins": {
     "kivicube-slam": {
       "provider": "wx12ad8a61f049ea02",
-      "version": "1.3.21"
+      "version": "1.3.22"
     }
   },
   "window": {

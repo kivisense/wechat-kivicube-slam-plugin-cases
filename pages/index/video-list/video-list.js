@@ -1,6 +1,6 @@
 import list from "../list-config";
 
-const videoList = list.map((item, index) => ({ id: index + 1, url: item.video, name: item.name, customBtn: item.customBtn, poster: item.poster, objectFit: "cover" }))
+const videoList = list.map((item, index) => ({ id: index + 1, url: item.video, name: item.name, path: item.path, customBtn: item.customBtn, poster: item.poster, objectFit: "cover" }))
 
 Page({
   data: {

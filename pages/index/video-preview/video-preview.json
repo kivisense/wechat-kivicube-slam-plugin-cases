@@ -1,0 +1,6 @@
+{
+  "disableScroll": true,
+  "navigationStyle": "custom",
+  "usingComponents": {
+      "back-btn": "../../components/back-btn/back-btn"  }
+}
