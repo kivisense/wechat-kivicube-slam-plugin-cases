@@ -44,7 +44,7 @@ Page({
        * @param {Array} [sceneList=[]] - 希望识别到的场景id列表。如果识别到的场景不在此列表中，则会忽略，继续识别。如果为空，或空数组，则代表识别合辑下的所有场景。
        * @returns {Promise<String|Undefined>} 场景id。如果识别过程中调用了stopCloudar，则会返回undefined值。
        */
-      const sceneId = await this.slam.startCloudar("b46rfc").catch((err) => {
+      const sceneId = await this.slam.startCloudar("9l0rm3").catch((err) => {
         clearTimeout(timer);
         errorHandler(err);
       });
