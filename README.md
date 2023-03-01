@@ -3,9 +3,9 @@
 ## 源码目录
 
 
-#### 1、[云识别 - 平面AR](../../tree/master/pages/cloudar-plane/api/)，云识别后再识别平面以放置模型。
+#### 1、[云识别 - 平面AR](../../tree/main/pages/cloudar-plane/api/)，云识别后再识别平面以放置模型。
 
-#### 2、[云识别 - 漫游AR](../../tree/master/pages/cloudar-vio/)，云识别后使用漫游AR快速放置模型。
+#### 2、[云识别 - 漫游AR](../../tree/main/pages/cloudar-vio/)，云识别后使用漫游AR快速放置模型。
 
 
 ## 快速体验
